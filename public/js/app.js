@@ -2032,37 +2032,48 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['publicacion'],
+  props: ["publicacion"],
   data: function data() {
     return {
       comentarios: [],
-      comentar: '',
+      comentar: "",
       contador: 0
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    this.$axios.get('/comentarios').then(function (response) {
-      _this.comentarios = response.data;
-    });
+    this.load();
   },
   methods: {
     newComentario: function newComentario() {
-      var _this2 = this;
+      var _this = this;
 
       var params = {
         idPublicacion: this.publicacion.id,
         comentario: this.comentar
       };
-      this.$axios.post('/comentarios', params).then(function (response) {
-        var comentario = response;
+      this.$axios.post("/comentarios", params).then(function (response) {
+        load;
+        _this.comentar = "";
+        _this.incrementa;
+      });
+    },
+    load: function load() {
+      var _this2 = this;
 
-        _this2.comentarios.push(comentario);
-
-        _this2.comentar = '';
-        _this2.incrementa;
+      this.$axios.get("/comentarios").then(function (response) {
+        _this2.comentarios = response.data;
       });
     }
   },
@@ -48445,7 +48456,9 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("b-card-sub-title", { staticClass: "mb-4" }, [
-                  _vm._v(" " + _vm._s(_vm.incrementa) + " Comentarios")
+                  _vm._v(
+                    "\n            " + _vm._s(_vm.incrementa) + " Comentarios"
+                  )
                 ]),
                 _vm._v(" "),
                 _vm._l(_vm.comentarios, function(comentario) {
