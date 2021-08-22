@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-md-4">
         <div>
-          <b-card class="mb-5">
+          <b-card class="mb-5" style="border-radius: 20px;">
             <b-card-body>
               <b-card-title class="text-center">{{ publicacion.descripcion }}</b-card-title>
             </b-card-body>
