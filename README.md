@@ -6,7 +6,7 @@ INSTRUCCIONES PARA LA EJECUCIÓN DEL PROYECTO:
 *`php artisan migrate` commando para crear las tablas dentro de la base de datos
 *`php artisan serve` para ver ejecutar y ver el proyecto
 *ejecutar comandos en carpeta del proyecto
-*si el archivo .env no se encuentra crear uno en la raiz del proyecto y copiar el siguiente codigo:
+*si el archivo .env no se encuentra crear uno en la raiz del proyecto y copiar el siguiente codigo no olvides modificar los datos de la BD para la conexion:
 //////////////////////////////////////////////////////////////////////////////
 APP_NAME=PruebaTecnica
 APP_ENV=local
