@@ -19,10 +19,8 @@
             </div>
 
             <div class="card-body">
-              <div class="form-group">
-                  <label for="imagen">Agregar Imagen</label>
-                  <input type="file" @change="obtenerImagen" class="form-control-file">
-              </div>
+              <b-form-file v-model="file"  @change="obtenerImagen" ref="file-input" class="mb-2"
+              placeholder="presiona si deseas agregar una imagen"></b-form-file>
               <figure>
                   <img whith="200" height="200" :src="imagen" alt="Foto de la publicacion">
               </figure>
@@ -40,7 +38,8 @@ export default {
     data(){
         return{
             description: '',
-            imagenMiniatura:''
+            imagenMiniatura:'',
+            file: null
         }
     },
   mounted() {
@@ -50,20 +49,22 @@ export default {
 
       newPublicacion(){
           const params = {
-              image: 'https://placekitten.com/480/210',
+              image: this.imagenMiniatura,
               description: this.description
           };
           this.$axios.post('/publicaciones', params).then((response)=>{
               const publicacion=response;
                 this.$emit('new',publicacion);
                 this.description='';
+                this.imagenMiniatura='';
+                this.file=null;
           })
 
 
       },
       obtenerImagen(e){
-          let file = e.target.files[0];
-          this.cargarImagen(file);
+          this.file = e.target.files[0];
+          this.cargarImagen(this.file);
       },
       cargarImagen(file){
           let reader = new FileReader();

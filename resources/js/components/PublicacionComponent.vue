@@ -5,7 +5,7 @@
         <div>
           <b-card class="mb-5">
             <b-card-body>
-              <b-card-title>{{ publicacion.descripcion }}</b-card-title>
+              <b-card-title class="text-center">{{ publicacion.descripcion }}</b-card-title>
             </b-card-body>
             <b-card-img
               class="mb-4"
@@ -16,20 +16,20 @@
               {{ incrementa }} Comentarios</b-card-sub-title
             >
 
-            <b-list-group
-              flush
+            <b-list-group flush class="mb-2"
+             style="border-radius: 10px;"
               v-for="comentario in comentarios"
               :key="comentario.id"
             >
-              <b-list-group-item
+              <b-list-group-item variant="secondary"
                 v-if="publicacion.id == comentario.idPublicacion"
                 >{{ comentario.comentario }}</b-list-group-item
               >
             </b-list-group>
 
-            <b-card-footer>
-              <form v-on:submit.prevent="newComentario">
-                <input
+            <b-card-footer  style="border-radius: 10px;">
+              <form class="center" v-on:submit.prevent="newComentario">
+                <b-form-input
                   v-model="comentar"
                   class="mb-3"
                   type="text"
@@ -39,8 +39,8 @@
                     border: 1px solid #39c;
                     outline: none;
                   "
-                />
-                <b-button type="submit" variant="primary">Comentar</b-button>
+                ></b-form-input>
+                <div class="text-center"><b-button type="submit" variant="primary">Comentar</b-button></div>
               </form>
             </b-card-footer>
           </b-card>
@@ -71,7 +71,7 @@ export default {
         comentario: this.comentar,
       };
       this.$axios.post("/comentarios", params).then((response) => {
-        load;
+        this.load();
         this.comentar = "";
         this.incrementa;
       });

@@ -15,7 +15,7 @@ class CreatePublicacionesTable extends Migration
     {
         Schema::create('publicaciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('imagen')->nullable;
+            $table->longText('imagen')->nullable();
             $table->string('descripcion');
             $table->timestamps();
         });

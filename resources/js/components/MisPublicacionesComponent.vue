@@ -14,13 +14,17 @@ export default {
         }
     },
   mounted() {
-    this.$axios.get('/publicaciones').then((response)=>{
-        this.publicaciones = response.data;
-    })
+   this.loadPublication();
   },
   methods: {
       addPublicacion(publicacion){
-          this.publicaciones.push(publicacion);
+         // this.publicaciones.push(publicacion);
+         this.loadPublication();
+      },
+      loadPublication(){
+        this.$axios.get('/publicaciones').then((response)=>{
+        this.publicaciones = response.data;
+    })
       }
   }
 };

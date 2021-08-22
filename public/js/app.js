@@ -1880,13 +1880,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       description: '',
-      imagenMiniatura: ''
+      imagenMiniatura: '',
+      file: null
     };
   },
   mounted: function mounted() {
@@ -1897,7 +1896,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var params = {
-        image: 'https://placekitten.com/480/210',
+        image: this.imagenMiniatura,
         description: this.description
       };
       this.$axios.post('/publicaciones', params).then(function (response) {
@@ -1906,11 +1905,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.$emit('new', publicacion);
 
         _this.description = '';
+        _this.imagenMiniatura = '';
+        _this.file = null;
       });
     },
     obtenerImagen: function obtenerImagen(e) {
-      var file = e.target.files[0];
-      this.cargarImagen(file);
+      this.file = e.target.files[0];
+      this.cargarImagen(this.file);
     },
     cargarImagen: function cargarImagen(file) {
       var _this2 = this;
@@ -1959,15 +1960,19 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    this.$axios.get('/publicaciones').then(function (response) {
-      _this.publicaciones = response.data;
-    });
+    this.loadPublication();
   },
   methods: {
     addPublicacion: function addPublicacion(publicacion) {
-      this.publicaciones.push(publicacion);
+      // this.publicaciones.push(publicacion);
+      this.loadPublication();
+    },
+    loadPublication: function loadPublication() {
+      var _this = this;
+
+      this.$axios.get('/publicaciones').then(function (response) {
+        _this.publicaciones = response.data;
+      });
     }
   }
 });
@@ -2064,7 +2069,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         comentario: this.comentar
       };
       this.$axios.post("/comentarios", params).then(function (response) {
-        load;
+        _this.load();
+
         _this.comentar = "";
         _this.incrementa;
       });
@@ -48244,17 +48250,21 @@ var render = function() {
                 "div",
                 { staticClass: "card-body" },
                 [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "imagen" } }, [
-                      _vm._v("Agregar Imagen")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control-file",
-                      attrs: { type: "file" },
-                      on: { change: _vm.obtenerImagen }
-                    })
-                  ]),
+                  _c("b-form-file", {
+                    ref: "file-input",
+                    staticClass: "mb-2",
+                    attrs: {
+                      placeholder: "presiona si deseas agregar una imagen"
+                    },
+                    on: { change: _vm.obtenerImagen },
+                    model: {
+                      value: _vm.file,
+                      callback: function($$v) {
+                        _vm.file = $$v
+                      },
+                      expression: "file"
+                    }
+                  }),
                   _vm._v(" "),
                   _c("figure", [
                     _c("img", {
@@ -48443,7 +48453,7 @@ var render = function() {
                 _c(
                   "b-card-body",
                   [
-                    _c("b-card-title", [
+                    _c("b-card-title", { staticClass: "text-center" }, [
                       _vm._v(_vm._s(_vm.publicacion.descripcion))
                     ])
                   ],
@@ -48464,66 +48474,75 @@ var render = function() {
                 _vm._l(_vm.comentarios, function(comentario) {
                   return _c(
                     "b-list-group",
-                    { key: comentario.id, attrs: { flush: "" } },
+                    {
+                      key: comentario.id,
+                      staticClass: "mb-2",
+                      staticStyle: { "border-radius": "10px" },
+                      attrs: { flush: "" }
+                    },
                     [
                       _vm.publicacion.id == comentario.idPublicacion
-                        ? _c("b-list-group-item", [
-                            _vm._v(_vm._s(comentario.comentario))
-                          ])
+                        ? _c(
+                            "b-list-group-item",
+                            { attrs: { variant: "secondary" } },
+                            [_vm._v(_vm._s(comentario.comentario))]
+                          )
                         : _vm._e()
                     ],
                     1
                   )
                 }),
                 _vm._v(" "),
-                _c("b-card-footer", [
-                  _c(
-                    "form",
-                    {
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.newComentario.apply(null, arguments)
+                _c(
+                  "b-card-footer",
+                  { staticStyle: { "border-radius": "10px" } },
+                  [
+                    _c(
+                      "form",
+                      {
+                        staticClass: "center",
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.newComentario.apply(null, arguments)
+                          }
                         }
-                      }
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
+                      },
+                      [
+                        _c("b-form-input", {
+                          staticClass: "mb-3",
+                          staticStyle: {
+                            "border-radius": "5px",
+                            border: "1px solid #39c",
+                            outline: "none"
+                          },
+                          attrs: { type: "text", placeholder: "Comentar" },
+                          model: {
                             value: _vm.comentar,
+                            callback: function($$v) {
+                              _vm.comentar = $$v
+                            },
                             expression: "comentar"
                           }
-                        ],
-                        staticClass: "mb-3",
-                        staticStyle: {
-                          "border-radius": "5px",
-                          border: "1px solid #39c",
-                          outline: "none"
-                        },
-                        attrs: { type: "text", placeholder: "Comentar" },
-                        domProps: { value: _vm.comentar },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.comentar = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "b-button",
-                        { attrs: { type: "submit", variant: "primary" } },
-                        [_vm._v("Comentar")]
-                      )
-                    ],
-                    1
-                  )
-                ])
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "text-center" },
+                          [
+                            _c(
+                              "b-button",
+                              { attrs: { type: "submit", variant: "primary" } },
+                              [_vm._v("Comentar")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
               ],
               2
             )
