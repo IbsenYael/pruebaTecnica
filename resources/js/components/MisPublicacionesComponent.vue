@@ -1,6 +1,5 @@
 <template>
      <div id="app">
-            <navbar-component></navbar-component>
             <home-component @new="addPublicacion"></home-component>
             <publicacion-component v-for="publicacion in publicaciones" :key="publicacion.id"
             :publicacion="publicacion"></publicacion-component>

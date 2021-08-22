@@ -13,9 +13,6 @@
         <link href="{{asset('css/app.css')}}" rel="stylesheet">
     </head>
     <body >
-        <div id="app">
-            <mispublicaciones-component></mispublicaciones-component>
-            <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
-        </div>
+        <a class="text-center" href="{{ route('home') }}">
     </body>
 </html>

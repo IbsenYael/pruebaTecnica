@@ -18,6 +18,7 @@ class PublicacionesController extends Controller
         $publicaciones = new Publicaciones;
         $publicaciones->imagen =  request('image');
         $publicaciones->descripcion= request('description');
+        $publicaciones->user= request('user');
         $publicaciones->save();
         return $publicaciones;
     }

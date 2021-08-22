@@ -48,7 +48,9 @@ export default {
   methods:{
 
       newPublicacion(){
+          let aux =document.head.querySelector('meta[name="user"]');
           const params = {
+              user: JSON.parse(aux.content).name,
               image: this.imagenMiniatura,
               description: this.description
           };

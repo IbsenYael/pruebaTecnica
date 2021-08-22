@@ -5,6 +5,7 @@
         <div>
           <b-card class="mb-5" style="border-radius: 20px;">
             <b-card-body>
+                <p><b>{{ publicacion.user }}</b></p>
               <b-card-title class="text-center">{{ publicacion.descripcion }}</b-card-title>
             </b-card-body>
             <b-card-img
@@ -19,11 +20,11 @@
             <b-list-group flush class="mb-2"
              style="border-radius: 10px;"
               v-for="comentario in comentarios"
-              :key="comentario.id"
-            >
+              :key="comentario.id">
               <b-list-group-item variant="secondary"
-                v-if="publicacion.id == comentario.idPublicacion"
-                >{{ comentario.comentario }}</b-list-group-item
+                v-if="publicacion.id == comentario.idPublicacion">
+                <p><b>{{comentario.user}}</b></p>
+                {{ comentario.comentario }}</b-list-group-item
               >
             </b-list-group>
 
@@ -66,9 +67,11 @@ export default {
   },
   methods: {
     newComentario() {
+        let aux =document.head.querySelector('meta[name="user"]');
       const params = {
         idPublicacion: this.publicacion.id,
         comentario: this.comentar,
+        user: JSON.parse(aux.content).name
       };
       this.$axios.post("/comentarios", params).then((response) => {
         this.load();

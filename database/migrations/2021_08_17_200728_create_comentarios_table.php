@@ -17,6 +17,7 @@ class CreateComentariosTable extends Migration
             $table->increments('id');
             $table->bigInteger('idPublicacion');
             $table->string('comentario');
+            $table->string('user');
             //$table->foreign('idPublicacion')->references('id')->on('publicaciones');
             $table->timestamps();
         });

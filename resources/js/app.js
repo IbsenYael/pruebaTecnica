@@ -30,7 +30,6 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
-Vue.component('navbar-component', require('./components/NavBarComponent.vue').default);
 Vue.component('publicacion-component', require('./components/PublicacionComponent.vue').default);
 Vue.component('mispublicaciones-component', require('./components/MisPublicacionesComponent.vue').default);
 

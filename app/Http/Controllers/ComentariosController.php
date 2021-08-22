@@ -17,6 +17,7 @@ class ComentariosController extends Controller
         $comentarios = new Comentarios;
         $comentarios->idPublicacion= request('idPublicacion');
         $comentarios->comentario =  request('comentario');
+        $comentarios->user = request('user');
         $comentarios->save();
         return $comentarios;
     }
