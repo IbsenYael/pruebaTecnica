@@ -1,9 +1,9 @@
 INSTRUCCIONES PARA LA EJECUCIÓN DEL PROYECTO:
+*`npm install` comando para instalar dependencias de compilacion como lo es Laravel mix
+*`composer install` comando para instalar composer y poder ejecutar el proyecto
 *Configurar archivo .env del proyecto para la conexion a la base de datos
 *crear base de datos "prueba"
 *`php artisan migrate` commando para crear las tablas dentro de la base de datos
-*`npm install` comando para instalar dependencias de compilacion como lo es Laravel mix
-*`composer install` comando para instalar composer y poder ejecutar el proyecto
 *`php artisan serve` para ver ejecutar y ver el proyecto
 *ejecutar comandos en carpeta del proyecto
 *si el archivo .env no se encuentra crear uno en la raiz del proyecto y copiar el siguiente codigo:
